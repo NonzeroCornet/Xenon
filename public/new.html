@@ -1,9 +1,23 @@
-<ul class="slides">
-    <li class="slide">Element 1</li>
-    <li class="slide">Element 2</li>
-    <li class="slide">Element 3</li>
-    <li class="slide">Element 4</li>
-    <li class="slide">Element 5</li>
+<button
+    onclick="document.getElementById('elements').innerHTML += '<li class=\'slide\' ondblclick=\'this.remove()\'>'+document.getElementById('selectElem').value+'</li>'"
+>
+    New Element
+</button>
+
+<select id="selectElem">
+    <optgroup>
+        <option value="Login">Login</option>
+        <option value="Puzzle 1">Puzzle 1</option>
+        <option value="Puzzle 2">Puzzle 2</option>
+        <option value="Bomb">Bomb</option>
+    </optgroup>
+</select>
+<ul class="slides" id="elements">
+    <li class="slide" ondblclick="this.remove()">Element 1</li>
+    <li class="slide" ondblclick="this.remove()">Element 2</li>
+    <li class="slide" ondblclick="this.remove()">Element 3</li>
+    <li class="slide" ondblclick="this.remove()">Element 4</li>
+    <li class="slide" ondblclick="this.remove()">Element 5</li>
 </ul>
 
 <style>
