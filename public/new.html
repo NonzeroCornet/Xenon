@@ -1,1 +1,109 @@
-INSERT PRESET CREATOR HERE
+<ul class="slides">
+    <li class="slide">Element 1</li>
+    <li class="slide">Element 2</li>
+    <li class="slide">Element 3</li>
+    <li class="slide">Element 4</li>
+    <li class="slide">Element 5</li>
+</ul>
+
+<style>
+    body {
+        padding: 20px;
+    }
+    .slides {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 300px;
+    }
+    .slide {
+        padding: 15px;
+        background-color: #2f2f2f;
+        margin: 0 0 15px;
+        text-align: center;
+        color: #fff;
+        border: 2px solid #444;
+    }
+
+    .slide-placeholder {
+        background: #dadada;
+        position: relative;
+    }
+    .slide-placeholder:after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 15px;
+        background-color: #fff;
+    }
+
+    .slide2 {
+        height: 30px;
+    }
+    .slide3 {
+        height: 50px;
+    }
+    .slide4 {
+        height: 90px;
+    }
+    .slide5 {
+        height: 35px;
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(".slides").sortable({
+        placeholder: "slide-placeholder",
+        axis: "y",
+        revert: 150,
+        start: function (e, ui) {
+            placeholderHeight = ui.item.outerHeight();
+            ui.placeholder.height(placeholderHeight + 15);
+            $(
+                '<div class="slide-placeholder-animator" data-height="' +
+                    placeholderHeight +
+                    '"></div>'
+            ).insertAfter(ui.placeholder);
+        },
+        change: function (event, ui) {
+            ui.placeholder
+                .stop()
+                .height(0)
+                .animate(
+                    {
+                        height: ui.item.outerHeight() + 15,
+                    },
+                    300
+                );
+
+            placeholderAnimatorHeight = parseInt(
+                $(".slide-placeholder-animator").attr("data-height")
+            );
+
+            $(".slide-placeholder-animator")
+                .stop()
+                .height(placeholderAnimatorHeight + 15)
+                .animate(
+                    {
+                        height: 0,
+                    },
+                    300,
+                    function () {
+                        $(this).remove();
+                        placeholderHeight = ui.item.outerHeight();
+                        $(
+                            '<div class="slide-placeholder-animator" data-height="' +
+                                placeholderHeight +
+                                '"></div>'
+                        ).insertAfter(ui.placeholder);
+                    }
+                );
+        },
+        stop: function (e, ui) {
+            $(".slide-placeholder-animator").remove();
+        },
+    });
+</script>
