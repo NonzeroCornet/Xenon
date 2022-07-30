@@ -17,6 +17,13 @@ fastify.get("/p/:preset", function (req, res) {
     res.type("text/html").send(bufferIndexHtml);
 });
 
+fastify.get("/new", function (req, res) {
+    const bufferIndexHtml = fs.readFileSync(
+        path.join(__dirname, "/public/new.html")
+    );
+    res.type("text/html").send(bufferIndexHtml);
+});
+
 fastify.register(require("@fastify/static"), {
     root: path.join(__dirname, "public"),
     prefix: "/",
