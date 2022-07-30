@@ -1,1 +1,59 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            @font-face {
+                font-family: edge;
+                src: url(EdgeOfTheGalaxyRegular-OVEa6.otf) format("opentype");
+            }
+
+            body {
+                margin-top: 15%;
+                font-family: edge;
+                background-color: #ce00d1;
+            }
+
+            optgroup,
+            select {
+                letter-spacing: 2px;
+                font-family: edge;
+                padding-top: 2px;
+            }
+
+            select {
+                height: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <p style="font-size: xx-large; letter-spacing: 2px">
+                Please Select Preset From The Dropdown
+            </p>
+            <label for="presets">Presets:</label>
+
+            <select name="presets" id="presets">
+                <optgroup>
+                    <option value="Login">Login</option>
+                    <option value="Puzzle 1">Puzzle 1</option>
+                    <option value="Puzzle 2">Puzzle 2</option>
+                    <option value="Bomb">Bomb</option>
+                </optgroup>
+            </select>
+            <br /><br />
+            <button
+                onclick="window.location.href += document.getElementById('presets').value.replace(/\s/g, '_')+'.html'"
+            >
+                Start
+            </button>
+
+            <script>
+                document.addEventListener("keydown", (event) => {
+                    if (event.ctrlKey) {
+                        event.preventDefault();
+                    }
+                });
+            </script>
+        </center>
+    </body>
+</html>

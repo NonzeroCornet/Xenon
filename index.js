@@ -9,6 +9,11 @@ fastify.get("/", function (req, res) {
     res.type("text/html").send(bufferIndexHtml);
 });
 
+fastify.register(require("@fastify/static"), {
+    root: path.join(__dirname, "public"),
+    prefix: "/",
+});
+
 fastify.listen({ port: 80, host: "0.0.0.0" }, function (err, address) {
     if (err) {
         fastify.log.error(err);
