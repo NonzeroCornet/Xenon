@@ -1,8 +1,15 @@
-<button
-    onclick="document.getElementById('elements').innerHTML += '<li class=\'slide\' ondblclick=\'this.remove()\'>'+document.getElementById('selectElem').value+'</li>'"
->
-    New Element
-</button>
+<button onclick="newElement()">New Element</button>
+
+<script>
+    function newElement() {
+        if (document.getElementById("selectElem").value != "Upload") {
+            document.getElementById("elements").innerHTML +=
+                "<li class='slide' ondblclick='this.remove()'>'+document.getElementById('selectElem').value+'<button>Add Data</button></li>";
+        } else {
+            alert("Upload now");
+        }
+    }
+</script>
 
 <select id="selectElem">
     <optgroup>
@@ -10,14 +17,25 @@
         <option value="Puzzle 1">Puzzle 1</option>
         <option value="Puzzle 2">Puzzle 2</option>
         <option value="Bomb">Bomb</option>
+        <option value="Upload">Upload</option>
     </optgroup>
 </select>
 <ul class="slides" id="elements">
-    <li class="slide" ondblclick="this.remove()">Element 1</li>
-    <li class="slide" ondblclick="this.remove()">Element 2</li>
-    <li class="slide" ondblclick="this.remove()">Element 3</li>
-    <li class="slide" ondblclick="this.remove()">Element 4</li>
-    <li class="slide" ondblclick="this.remove()">Element 5</li>
+    <li class="slide" ondblclick="this.remove()">
+        Element 1 <button>Add Data</button>
+    </li>
+    <li class="slide" ondblclick="this.remove()">
+        Element 2 <button>Add Data</button>
+    </li>
+    <li class="slide" ondblclick="this.remove()">
+        Element 3 <button>Add Data</button>
+    </li>
+    <li class="slide" ondblclick="this.remove()">
+        Element 4 <button>Add Data</button>
+    </li>
+    <li class="slide" ondblclick="this.remove()">
+        Element 5 <button>Add Data</button>
+    </li>
 </ul>
 
 <style>
