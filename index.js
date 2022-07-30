@@ -1,10 +1,18 @@
 const path = require("path");
 const fs = require("fs");
+const { request } = require("http");
 const fastify = require("fastify")();
 
 fastify.get("/", function (req, res) {
     const bufferIndexHtml = fs.readFileSync(
         path.join(__dirname, "/public/index.html")
+    );
+    res.type("text/html").send(bufferIndexHtml);
+});
+
+fastify.get("/p/:preset", function (req, res) {
+    const bufferIndexHtml = fs.readFileSync(
+        path.join(__dirname, "/public/presets.html")
     );
     res.type("text/html").send(bufferIndexHtml);
 });
