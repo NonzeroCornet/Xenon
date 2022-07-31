@@ -1,171 +1,176 @@
-<button onclick="newElement()">New Element</button>
+<center>
+    <input id="name" value="Preset Name" /><br />
+    <button onclick="newElement()">New Element</button>
 
-<script>
-    function newElement() {
-        if (document.getElementById("selectElem").value != "Upload") {
-            document.getElementById("elements").innerHTML +=
-                "<li class='slide' ondblclick='this.remove()'><p>" +
-                document.getElementById("selectElem").value +
-                "</p> <button onclick='addData(this)'>Add Data</button></li>";
-        } else {
-            alert("Upload now");
+    <script>
+        function newElement() {
+            if (document.getElementById("selectElem").value != "Upload") {
+                document.getElementById("elements").innerHTML +=
+                    "<li class='slide' ondblclick='this.remove()'><p>" +
+                    document.getElementById("selectElem").value +
+                    "</p> <button onclick='addData(this)'>Add Data</button></li>";
+            } else {
+                alert("Upload now");
+            }
         }
-    }
 
-    function addData(element) {
-        var prmpt = prompt("Data:", element.parentElement.dataset.extra);
-        element.parentElement.dataset.extra = prmpt;
-    }
-
-    function parsePreset() {
-        let parsedPreset = "{";
-        let elems = document.getElementById("elements");
-        for (let i = 0; i < elems.children.length; i++) {
-            parsedPreset +=
-                '"' +
-                elems.children[i].children[0].innerHTML +
-                '": "' +
-                elems.children[i].dataset.extra +
-                '",';
+        function addData(element) {
+            var prmpt = prompt("Data:", element.parentElement.dataset.extra);
+            element.parentElement.dataset.extra = prmpt;
         }
-        parsedPreset = JSON.parse(parsedPreset.slice(0, -1) + "}");
-        return parsedPreset;
-    }
-</script>
 
-<select id="selectElem">
-    <optgroup>
-        <option value="Login">Login</option>
-        <option value="Puzzle 1">Puzzle 1</option>
-        <option value="Puzzle 2">Puzzle 2</option>
-        <option value="Bomb">Bomb</option>
-        <option value="Upload">Upload</option>
-    </optgroup>
-</select>
-<button onclick="document.cookie = 'preset='+JSON.stringify(parsePreset())+';'">
-    Save Preset
-</button>
-<ul class="slides" id="elements">
-    <li class="slide" ondblclick="this.remove()">
-        <p>Element 1</p>
-        <button onclick="addData(this)">Add Data</button>
-    </li>
-    <li class="slide" ondblclick="this.remove()">
-        <p>Element 2</p>
-        <button onclick="addData(this)">Add Data</button>
-    </li>
-    <li class="slide" ondblclick="this.remove()">
-        <p>Element 3</p>
-        <button onclick="addData(this)">Add Data</button>
-    </li>
-    <li class="slide" ondblclick="this.remove()">
-        <p>Element 4</p>
-        <button onclick="addData(this)">Add Data</button>
-    </li>
-    <li class="slide" ondblclick="this.remove()">
-        <p>Element 5</p>
-        <button onclick="addData(this)">Add Data</button>
-    </li>
-</ul>
+        function parsePreset() {
+            let parsedPreset = "{";
+            let elems = document.getElementById("elements");
+            for (let i = 0; i < elems.children.length; i++) {
+                parsedPreset +=
+                    '"' +
+                    elems.children[i].children[0].innerHTML +
+                    '": "' +
+                    elems.children[i].dataset.extra +
+                    '",';
+            }
+            parsedPreset = JSON.parse(parsedPreset.slice(0, -1) + "}");
+            return parsedPreset;
+        }
+    </script>
 
-<style>
-    body {
-        padding: 20px;
-    }
-    .slides {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        width: 300px;
-    }
-    .slide {
-        padding: 15px;
-        background-color: #2f2f2f;
-        margin: 0 0 15px;
-        text-align: center;
-        color: #fff;
-        border: 2px solid #444;
-    }
+    <select id="selectElem">
+        <optgroup>
+            <option value="Login">Login</option>
+            <option value="Puzzle 1">Puzzle 1</option>
+            <option value="Puzzle 2">Puzzle 2</option>
+            <option value="Bomb">Bomb</option>
+            <option value="Upload">Upload</option>
+        </optgroup>
+    </select>
+    <button
+        onclick="document.cookie = document.getElementById('name').value + '='+JSON.stringify(parsePreset())+'; expires=Fri, 31 Dec 9999 23:59:59 GMT;'; window.location.replace('/')"
+    >
+        Save Preset
+    </button>
+    <ul class="slides" id="elements">
+        <li class="slide" ondblclick="this.remove()">
+            <p>Element 1</p>
+            <button onclick="addData(this)">Add Data</button>
+        </li>
+        <li class="slide" ondblclick="this.remove()">
+            <p>Element 2</p>
+            <button onclick="addData(this)">Add Data</button>
+        </li>
+        <li class="slide" ondblclick="this.remove()">
+            <p>Element 3</p>
+            <button onclick="addData(this)">Add Data</button>
+        </li>
+        <li class="slide" ondblclick="this.remove()">
+            <p>Element 4</p>
+            <button onclick="addData(this)">Add Data</button>
+        </li>
+        <li class="slide" ondblclick="this.remove()">
+            <p>Element 5</p>
+            <button onclick="addData(this)">Add Data</button>
+        </li>
+    </ul>
 
-    .slide-placeholder {
-        background: #dadada;
-        position: relative;
-    }
-    .slide-placeholder:after {
-        content: " ";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 15px;
-        background-color: #fff;
-    }
+    <style>
+        body {
+            padding: 20px;
+        }
+        .slides {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 300px;
+        }
+        .slide {
+            padding: 15px;
+            background-color: #2f2f2f;
+            margin: 0 0 15px;
+            text-align: center;
+            color: #fff;
+            border: 2px solid #444;
+        }
 
-    .slide2 {
-        height: 30px;
-    }
-    .slide3 {
-        height: 50px;
-    }
-    .slide4 {
-        height: 90px;
-    }
-    .slide5 {
-        height: 35px;
-    }
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script>
-    $(".slides").sortable({
-        placeholder: "slide-placeholder",
-        axis: "y",
-        revert: 150,
-        start: function (e, ui) {
-            placeholderHeight = ui.item.outerHeight();
-            ui.placeholder.height(placeholderHeight + 15);
-            $(
-                '<div class="slide-placeholder-animator" data-height="' +
-                    placeholderHeight +
-                    '"></div>'
-            ).insertAfter(ui.placeholder);
-        },
-        change: function (event, ui) {
-            ui.placeholder
-                .stop()
-                .height(0)
-                .animate(
-                    {
-                        height: ui.item.outerHeight() + 15,
-                    },
-                    300
+        .slide-placeholder {
+            background: #dadada;
+            position: relative;
+        }
+        .slide-placeholder:after {
+            content: " ";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 15px;
+            background-color: #fff;
+        }
+
+        .slide2 {
+            height: 30px;
+        }
+        .slide3 {
+            height: 50px;
+        }
+        .slide4 {
+            height: 90px;
+        }
+        .slide5 {
+            height: 35px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(".slides").sortable({
+            placeholder: "slide-placeholder",
+            axis: "y",
+            revert: 150,
+            start: function (e, ui) {
+                placeholderHeight = ui.item.outerHeight();
+                ui.placeholder.height(placeholderHeight + 15);
+                $(
+                    '<div class="slide-placeholder-animator" data-height="' +
+                        placeholderHeight +
+                        '"></div>'
+                ).insertAfter(ui.placeholder);
+            },
+            change: function (event, ui) {
+                ui.placeholder
+                    .stop()
+                    .height(0)
+                    .animate(
+                        {
+                            height: ui.item.outerHeight() + 15,
+                        },
+                        300
+                    );
+
+                placeholderAnimatorHeight = parseInt(
+                    $(".slide-placeholder-animator").attr("data-height")
                 );
 
-            placeholderAnimatorHeight = parseInt(
-                $(".slide-placeholder-animator").attr("data-height")
-            );
-
-            $(".slide-placeholder-animator")
-                .stop()
-                .height(placeholderAnimatorHeight + 15)
-                .animate(
-                    {
-                        height: 0,
-                    },
-                    300,
-                    function () {
-                        $(this).remove();
-                        placeholderHeight = ui.item.outerHeight();
-                        $(
-                            '<div class="slide-placeholder-animator" data-height="' +
-                                placeholderHeight +
-                                '"></div>'
-                        ).insertAfter(ui.placeholder);
-                    }
-                );
-        },
-        stop: function (e, ui) {
-            $(".slide-placeholder-animator").remove();
-        },
-    });
-</script>
+                $(".slide-placeholder-animator")
+                    .stop()
+                    .height(placeholderAnimatorHeight + 15)
+                    .animate(
+                        {
+                            height: 0,
+                        },
+                        300,
+                        function () {
+                            $(this).remove();
+                            placeholderHeight = ui.item.outerHeight();
+                            $(
+                                '<div class="slide-placeholder-animator" data-height="' +
+                                    placeholderHeight +
+                                    '"></div>'
+                            ).insertAfter(ui.placeholder);
+                        }
+                    );
+            },
+            stop: function (e, ui) {
+                $(".slide-placeholder-animator").remove();
+            },
+        });
+    </script>
+</center>

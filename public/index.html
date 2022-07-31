@@ -49,6 +49,22 @@
             <button onclick="window.location.href += 'new'">New Preset</button>
 
             <script>
+                let cookiePresets = document.cookie.split("=");
+                let i = cookiePresets.length;
+
+                while (i--) i % 2 === 1 && cookiePresets.splice(i, 1);
+
+                for (i in cookiePresets) {
+                    document.getElementById(
+                        "presets"
+                    ).firstElementChild.innerHTML +=
+                        '<option value="' +
+                        cookiePresets[i] +
+                        '">' +
+                        cookiePresets[i] +
+                        "</option>";
+                }
+
                 document.addEventListener("keydown", (event) => {
                     if (event.ctrlKey) {
                         event.preventDefault();
