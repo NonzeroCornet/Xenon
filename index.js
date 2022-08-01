@@ -10,7 +10,7 @@ fastify.get("/", function (req, res) {
     res.type("text/html").send(bufferIndexHtml);
 });
 
-fastify.get("/p/:preset", function (req, res) {
+fastify.get("/t/:timeline", function (req, res) {
     const bufferIndexHtml = fs.readFileSync(
         path.join(__dirname, "/public/presets.html")
     );

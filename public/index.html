@@ -42,9 +42,13 @@
             </select>
             <br /><br />
             <button
-                onclick="window.location.href += 'p/'+document.getElementById('presets').value.replace(/\s/g, '_')"
+                onclick="window.location.href += 't/'+document.getElementById('presets').value.replace(/\s/g, '_')"
             >
                 Start</button
+            ><button
+                onclick="if(window.confirm('ARE YOU SURE? THIS ACTION CANNOT BE UNDONE.')) {document.cookie = document.getElementById('presets').value + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; window.location.reload();}"
+            >
+                Delete Timeline</button
             ><br />
             <button onclick="window.location.href += 'new'">
                 New Timeline
