@@ -28,9 +28,9 @@
     <body>
         <center>
             <p style="font-size: xx-large; letter-spacing: 2px">
-                Please Select Preset From The Dropdown
+                Please Select Timeline From The Dropdown
             </p>
-            <label for="presets">Presets:</label>
+            <label for="presets">Timeline:</label>
 
             <select name="presets" id="presets">
                 <optgroup>
@@ -46,22 +46,22 @@
             >
                 Start</button
             ><br />
-            <button onclick="window.location.href += 'new'">New Preset</button>
+            <button onclick="window.location.href += 'new'">
+                New Timeline
+            </button>
 
             <script>
-                let cookiePresets = document.cookie.split("=");
+                let cookiePresets = document.cookie.split("; ");
                 let i = cookiePresets.length;
-
-                while (i--) i % 2 === 1 && cookiePresets.splice(i, 1);
 
                 for (i in cookiePresets) {
                     document.getElementById(
                         "presets"
                     ).firstElementChild.innerHTML +=
                         '<option value="' +
-                        cookiePresets[i] +
+                        cookiePresets[i].split("=")[0] +
                         '">' +
-                        cookiePresets[i] +
+                        cookiePresets[i].split("=")[0] +
                         "</option>";
                 }
 
