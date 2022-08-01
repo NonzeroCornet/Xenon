@@ -41,7 +41,7 @@
         </optgroup>
     </select>
     <button
-        onclick="document.cookie = document.getElementById('name').value + '='+JSON.stringify(parsePreset())+'; expires=Fri, 31 Dec 9999 23:59:59 GMT;'; window.location.replace('/')"
+        onclick="document.cookie = document.getElementById('name').value.replaceAll(' ', '_') + '='+JSON.stringify(parsePreset())+'; expires=Fri, 31 Dec 9999 23:59:59 GMT;'; window.location.replace('/')"
     >
         Save Preset
     </button>
@@ -49,7 +49,7 @@
         <li
             class="slide"
             ondblclick="this.remove()"
-            data-extra="username:nousername;password:password;"
+            data-extra="username:nousername>password:password>"
         >
             <p>Login</p>
             <button onclick="addData(this)">Add Data</button>
@@ -57,7 +57,7 @@
         <li
             class="slide"
             ondblclick="this.remove()"
-            data-extra="info:Successfully Logged In;"
+            data-extra="info:Successfully Logged In>"
         >
             <p>Info</p>
             <button onclick="addData(this)">Add Data</button>

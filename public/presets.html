@@ -1,12 +1,57 @@
-<script>
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(";").shift();
-    }
+<!DOCTYPE html>
+<html>
+    <body>
+        <style>
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                overflow: hidden;
+            }
 
-    var timelineToLoad = window.location.href.split("/t/")[1];
-    var timelineJSON = JSON.parse(getCookie(timelineToLoad));
+            iframe {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: 0px;
+            }
+        </style>
 
-    console.table(timelineJSON);
-</script>
+        <script>
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(";").shift();
+            }
+
+            var timelineToLoad = window.location.href.split("/t/")[1];
+            var timelineJSON = JSON.parse(getCookie(timelineToLoad));
+
+            let x = 99;
+            for (i in timelineJSON) {
+                document.getElementsByTagName("body")[0].innerHTML +=
+                    '<iframe width="100%" height="100%" frameborder="0" src="/cards/' +
+                    i +
+                    ".html?" +
+                    timelineJSON[i] +
+                    '" style="z-index: ' +
+                    x +
+                    '"></iframe>';
+                x--;
+            }
+
+            window.addEventListener(
+                "message",
+                (event) => {
+                    if (event.data == "nextCard") {
+                        document.getElementsByTagName("iframe")[0].remove();
+                    }
+                },
+                false
+            );
+        </script>
+        No Cards Left To Display.
+    </body>
+</html>

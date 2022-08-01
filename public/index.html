@@ -63,9 +63,9 @@
                         "presets"
                     ).firstElementChild.innerHTML +=
                         '<option value="' +
-                        cookiePresets[i].split("=")[0] +
+                        cookiePresets[i].split("=")[0].replaceAll("_", " ") +
                         '">' +
-                        cookiePresets[i].split("=")[0] +
+                        cookiePresets[i].split("=")[0].replaceAll("_", " ") +
                         "</option>";
                 }
 
