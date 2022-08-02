@@ -33,12 +33,7 @@
             <label for="presets">Timeline:</label>
 
             <select name="presets" id="presets">
-                <optgroup>
-                    <option value="Login">Login</option>
-                    <option value="Puzzle 1">Puzzle 1</option>
-                    <option value="Puzzle 2">Puzzle 2</option>
-                    <option value="Bomb">Bomb</option>
-                </optgroup>
+                <optgroup></optgroup>
             </select>
             <br /><br />
             <button
@@ -46,7 +41,7 @@
             >
                 Start</button
             ><button
-                onclick="if(window.confirm('ARE YOU SURE? THIS ACTION CANNOT BE UNDONE.')) {document.cookie = document.getElementById('presets').value + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; window.location.reload();}"
+                onclick="if(window.confirm('ARE YOU SURE? THIS ACTION CANNOT BE UNDONE.')) {document.cookie = document.getElementById('presets').value.replaceAll(' ', '_') + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; window.location.reload();}"
             >
                 Delete Timeline</button
             ><br />

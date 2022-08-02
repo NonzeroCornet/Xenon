@@ -1,7 +1,4 @@
 <center>
-    <input id="name" value="Timeline Name" /><br />
-    <button onclick="newElement()">New Card</button>
-
     <script>
         function newElement() {
             document.getElementById("elements").innerHTML +=
@@ -22,35 +19,34 @@
                 parsedPreset +=
                     '"' +
                     elems.children[i].children[0].innerHTML +
-                    '": "' +
-                    elems.children[i].dataset.extra +
+                    '":"' +
+                    elems.children[i].dataset.extra.replaceAll(";", "%3B") +
                     '",';
             }
             parsedPreset = JSON.parse(parsedPreset.slice(0, -1) + "}");
             return parsedPreset;
         }
     </script>
-
+    <input id="name" value="Timeline Name" /><button
+        onclick="document.cookie = document.getElementById('name').value.replaceAll(' ', '_') + '='+JSON.stringify(parsePreset())+'; expires=Fri, 31 Dec 9999 23:59:59 GMT;'; window.location.replace('/')"
+    >
+        Save Preset</button
+    ><br />
     <select id="selectElem">
         <optgroup>
             <option value="Login">Login</option>
             <option value="Info">Info</option>
-            <option value="Puzzle 1">Puzzle 1</option>
-            <option value="Puzzle 2">Puzzle 2</option>
-            <option value="Bomb">Bomb</option>
-            <option value="Custom">Custom</option>
         </optgroup>
     </select>
-    <button
-        onclick="document.cookie = document.getElementById('name').value.replaceAll(' ', '_') + '='+JSON.stringify(parsePreset())+'; expires=Fri, 31 Dec 9999 23:59:59 GMT;'; window.location.replace('/')"
-    >
-        Save Preset
+    <button onclick="newElement()">New Card</button>
+    <button onclick="window.open('/createCard', '', 'width=9999,height=9999');">
+        Create Card
     </button>
     <ul class="slides" id="elements">
         <li
             class="slide"
             ondblclick="this.remove()"
-            data-extra="username:nousername>password:password>"
+            data-extra="username:nousername;password:password;"
         >
             <p>Login</p>
             <button onclick="addData(this)">Add Data</button>
@@ -58,7 +54,7 @@
         <li
             class="slide"
             ondblclick="this.remove()"
-            data-extra="info:Successfully Logged In>"
+            data-extra="info:Successfully Logged In;"
         >
             <p>Info</p>
             <button onclick="addData(this)">Add Data</button>
