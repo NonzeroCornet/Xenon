@@ -1,8 +1,8 @@
 function cardData(data) {
     return decodeURIComponent(
         window.location.href
-            .split("?")[0]
-            .split(data + ":")[0]
+            .split("?")[1]
+            .split(data + ":")[1]
             .split("%3B")[0]
     );
 }

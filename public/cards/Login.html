@@ -1,15 +1,13 @@
 <body style="background-color: white">
     Login and stuff
+    <script src="https://xenoncdn.glitch.me/xenoncard.js"></script>
     <script>
-        let urlData = window.location.href.split("?")[1].split("%3E");
+        document.write(cardData("username"));
         document.write("<br>");
-
-        document.write(urlData[0].split(":")[1].replaceAll("%20", " "));
-        document.write("<br>");
-        document.write(urlData[1].split(":")[1].replaceAll("%20", " "));
+        document.write(cardData("password"));
 
         setTimeout(function () {
-            window.parent.postMessage("nextCard", "*");
+            nextCard();
         }, 2000);
     </script>
 </body>
