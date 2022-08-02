@@ -10,3 +10,9 @@ function cardData(data) {
 function nextCard() {
     window.parent.postMessage("nextCard", "*");
 }
+
+document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey) {
+        event.preventDefault();
+    }
+});
