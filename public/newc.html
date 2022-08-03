@@ -25,6 +25,7 @@
             Add Image
         </button>
         <button onclick="saveCard()">Save Card</button>
+        <input type="text" id="cardName" value="Card Name" />
     </div>
     <div id="allthethings">
         <div id="statics"></div>
@@ -149,17 +150,7 @@
         });
 
         function saveCard() {
-            console.log(
-                document
-                    .getElementById("allthethings")
-                    .innerHTML.replaceAll(
-                        '<div class="draggableheader">Click here to MOVE</div>',
-                        ""
-                    ) +
-                    "<style>" +
-                    document.getElementById("importantStyles").innerHTML +
-                    "</style>"
-            );
+            window.location.href = "/saveCard/" + document.getElementById("cardName").value.replace(" ", "_")+"/"+encodeURIComponent(document.getElementById("allthethings").innerHTML.replaceAll('<div class="draggableheader">Click here to MOVE</div>',"") +"<style>"+document.getElementById("importantStyles").innerHTML.replaceAll(".", "%2E").replaceAll("<", "%3C").replaceAll(">", "%3E").replaceAll("-", "%2D") +"</style>");
         }
 
         var altIsDown = false;
