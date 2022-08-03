@@ -1,24 +1,52 @@
-<body><button onclick="document.body.innerHTML += '<div class=\'draggable\'><input type=\'text\' value=\'Enter some placeholder text here\' /><div class=\'draggableheader\'>Click here to move</div></div>'; for(i in document.getElementsByClassName('draggable')) {dragElement(document.getElementsByClassName('draggable')[i]);}">New InputBox</button>
-<div class="draggable">
+<body>
+    <div>
+        <button onclick="document.body.innerHTML += '<div class=\'draggable\'><input type=\'text\' value=\'Enter some placeholder text here\' /><div class=\'draggableheader\'>Click here to move</div></div>'; for(i in document.getElementsByClassName('draggable')) {dragElement(document.getElementsByClassName('draggable')[i]);}">New InputBox</button>
+        <input type="file" id="backgroundUpload" />
+        <script>
+    // Get a reference to the file input
+    let fileInput = document.getElementById("backgroundUpload");
+
+    // Listen for the change event so we can capture the file
+    fileInput.addEventListener('change', (e) => {
+        // Get a reference to the file
+        const file = e.target.files[0];
+
+        // Encode the file using the FileReader API
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            document.body.style.background = "url("+reader.result+") no-repeat center center fixed";
+        };
+        reader.readAsDataURL(file);
+    });
+</script>
+    </div>
+        <div class="draggable">
     <input type="text" value="Test" /><br>
     <div class="draggableheader">Click here to move</div>
 </div>
 
 <style>
+    body {
+        background-size: cover;
+    }
+    
     .draggable {
         position: absolute;
         z-index: 9;
-        background-color: #f1f1f1;
-        border: 1px solid #d3d3d3;
         text-align: center;
     }
 
     .draggableheader {
+        opacity: 0%;
         padding: 10px;
         cursor: move;
-        z-index: 9;
+        z-index: 10;
         background-color: #2196f3;
         color: #fff;
+    }
+
+    .draggableheader:hover {
+        opacity: 100%;
     }
 </style>
 <script>
