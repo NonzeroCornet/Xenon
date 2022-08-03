@@ -1,98 +1,249 @@
 <body>
-    <div>
-        <button onclick="document.body.innerHTML += '<div class=\'draggable\'><input type=\'text\' value=\'Enter some placeholder text here\' /><div class=\'draggableheader\'>Click here to move</div></div>'; for(i in document.getElementsByClassName('draggable')) {dragElement(document.getElementsByClassName('draggable')[i]);}">New InputBox</button>
-        <input type="file" id="backgroundUpload" />
-        <script>
-    // Get a reference to the file input
-    let fileInput = document.getElementById("backgroundUpload");
-
-    // Listen for the change event so we can capture the file
-    fileInput.addEventListener('change', (e) => {
-        // Get a reference to the file
-        const file = e.target.files[0];
-
-        // Encode the file using the FileReader API
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            document.body.style.background = "url("+reader.result+") no-repeat center center fixed";
-        };
-        reader.readAsDataURL(file);
-    });
-</script>
+    <div style="position: absolute; z-index: 20; bottom: 10px; left: 10px">
+        <button
+            onclick="resetMovers(); document.getElementById('dynamics').innerHTML += '<div class=\'draggable\'><input id=\''+Math.floor(Math.random()*9999999999)+'\' type=\'text\' value=\'Enter some placeholder text here\' /><div class=\'draggableheader\'>Click here to MOVE</div></div>'; for(i in document.getElementsByClassName('draggable')) {dragElement(document.getElementsByClassName('draggable')[i]);}"
+        >
+            New InputBox
+        </button>
+        <input
+            type="file"
+            id="backgroundUpload"
+            style="display: none"
+            multiple
+        />
+        <input
+            type="file"
+            id="newImageUpload"
+            style="display: none"
+            onclick="resetMovers();"
+            multiple
+        />
+        <button onclick="document.getElementById('backgroundUpload').click()">
+            Change Background
+        </button>
+        <button onclick="document.getElementById('newImageUpload').click()">
+            Add Image
+        </button>
+        <button onclick="saveCard()">Save Card</button>
     </div>
-        <div class="draggable">
-    <input type="text" value="Test" /><br>
-    <div class="draggableheader">Click here to move</div>
-</div>
+    <div id="allthethings">
+        <div id="statics"></div>
+        <div id="dynamics">
+            <div class="draggable">
+                <input type="text" value="Test" /><br />
+                <div class="draggableheader">Click here to MOVE</div>
+            </div>
+        </div>
+    </div>
 
-<style>
-    body {
-        background-size: cover;
-    }
-    
-    .draggable {
-        position: absolute;
-        z-index: 9;
-        text-align: center;
-    }
-
-    .draggableheader {
-        opacity: 0%;
-        padding: 10px;
-        cursor: move;
-        z-index: 10;
-        background-color: #2196f3;
-        color: #fff;
-    }
-
-    .draggableheader:hover {
-        opacity: 100%;
-    }
-</style>
-<script>
-    for(i in document.getElementsByClassName("draggable")) {
-        dragElement(document.getElementsByClassName("draggable")[i]);
-    }
-
-    function dragElement(elmnt) {
-        var pos1 = 0,
-            pos2 = 0,
-            pos3 = 0,
-            pos4 = 0;
-        try {
-        for (var i = 0; i < elmnt.childNodes.length; i++) {
-    if (elmnt.childNodes[i].className == "draggableheader") {
-      elmnt.childNodes[i].onmousedown = dragMouseDown;
-      break;
-    }        
-}} catch (e) {
-            return;
-}
-
-        function dragMouseDown(e) {
-            e = e || window.event;
-            e.preventDefault();
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            document.onmousemove = elementDrag;
+    <style id="importantStyles">
+        #statics {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            position: absolute;
+            z-index: 1;
+            top: 0px;
+            left: 0px;
         }
 
-        function elementDrag(e) {
-            e = e || window.event;
-            e.preventDefault();
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            elmnt.style.top = elmnt.offsetTop - pos2 + "px";
-            elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+        .draggable {
+            position: absolute;
+            z-index: 9;
+            text-align: center;
+        }
+    </style>
+    <style>
+        .draggableheader {
+            opacity: 0%;
+            padding: 10px;
+            cursor: move;
+            z-index: 10;
+            background-color: #2196f3;
+            color: #fff;
         }
 
-        function closeDragElement() {
-            document.onmouseup = null;
-            document.onmousemove = null;
+        .draggableheader:hover {
+            opacity: 100%;
         }
-    }
-</script>
+    </style>
+    <script>
+        for (i in document.getElementsByClassName("draggable")) {
+            dragElement(document.getElementsByClassName("draggable")[i]);
+        }
+
+        function dragElement(elmnt) {
+            var pos1 = 0,
+                pos2 = 0,
+                pos3 = 0,
+                pos4 = 0;
+            try {
+                for (var i = 0; i < elmnt.childNodes.length; i++) {
+                    if (elmnt.childNodes[i].className == "draggableheader") {
+                        elmnt.childNodes[i].onmousedown = dragMouseDown;
+                        break;
+                    }
+                }
+            } catch (e) {
+                return;
+            }
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+                elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+    </script>
+
+    <script>
+        let fileInput = document.getElementById("backgroundUpload");
+        let fileInput2 = document.getElementById("newImageUpload");
+        fileInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+
+            let reader = new FileReader();
+            reader.onloadend = () => {
+                document.getElementById("statics").style.background =
+                    "no-repeat center/100% url(" + reader.result + ")";
+            };
+            reader.readAsDataURL(file);
+            console.log("EH?");
+        });
+
+        fileInput2.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+
+            let reader2 = new FileReader();
+            reader2.onloadend = () => {
+                document.getElementById("statics").innerHTML +=
+                    "<div class='draggable'><img src=\"" +
+                    reader2.result +
+                    "\" /><div class='draggableheader'>Click here to MOVE</div></div>";
+                for (i in document.getElementsByClassName("draggable")) {
+                    dragElement(
+                        document.getElementsByClassName("draggable")[i]
+                    );
+                }
+            };
+            reader2.readAsDataURL(file);
+        });
+
+        function saveCard() {
+            console.log(
+                document
+                    .getElementById("allthethings")
+                    .innerHTML.replaceAll(
+                        '<div class="draggableheader">Click here to MOVE</div>',
+                        ""
+                    ) +
+                    "<style>" +
+                    document.getElementById("importantStyles").innerHTML +
+                    "</style>"
+            );
+        }
+
+        var altIsDown = false;
+        var shiftIsDown = false;
+        window.addEventListener("keydown", (event) => {
+            if (event.key == "Alt") {
+                shiftIsDown = false;
+                var elements =
+                    document.getElementsByClassName("draggableheader");
+                if (!altIsDown) {
+                    altIsDown = true;
+
+                    for (var i = 0; i < elements.length; i++) {
+                        elements[i].style.backgroundColor = "red";
+                        elements[i].innerHTML = "Click here to DELETE";
+                        elements[i].setAttribute(
+                            "onclick",
+                            "this.parentElement.remove();"
+                        );
+                    }
+                } else {
+                    altIsDown = false;
+                    for (var i = 0; i < elements.length; i++) {
+                        elements[i].style.backgroundColor = "#2196f3";
+                        elements[i].innerHTML = "Click here to MOVE";
+                        elements[i].setAttribute("onclick", "");
+                    }
+                }
+            }
+        });
+
+        window.addEventListener("keydown", (event) => {
+            if (event.key == "Shift") {
+                altIsDown = false;
+                var elements =
+                    document.getElementsByClassName("draggableheader");
+                if (!shiftIsDown) {
+                    shiftIsDown = true;
+
+                    for (var i = 0; i < elements.length; i++) {
+                        elements[i].style.backgroundColor = "lime";
+                        elements[i].innerHTML = "Click here to EDIT";
+                        elements[i].setAttribute("onclick", "alert('edit')");
+                    }
+                } else {
+                    shiftIsDown = false;
+                    for (var i = 0; i < elements.length; i++) {
+                        elements[i].style.backgroundColor = "#2196f3";
+                        elements[i].innerHTML = "Click here to MOVE";
+                        elements[i].setAttribute("onclick", "");
+                    }
+                }
+            }
+        });
+
+        function connectInputToButton(inputElem, buttonElem, inputValue) {
+            inputElem.onchange =
+                "if(this.value == '" +
+                inputValue +
+                "') {document.getElementById('" +
+                buttonElem.id +
+                "').disabled = false} else {document.getElementById('" +
+                buttonElem.id +
+                "').disabled = true}";
+        }
+
+        function resetMovers() {
+            altIsDown = false;
+            shiftIsDown = false;
+            for (
+                var i = 0;
+                i < document.getElementsByClassName("draggableheader").length;
+                i++
+            ) {
+                document.getElementsByClassName("draggableheader")[
+                    i
+                ].style.backgroundColor = "#2196f3";
+                document
+                    .getElementsByClassName("draggableheader")
+                    [i].setAttribute("onclick", "");
+                document.getElementsByClassName("draggableheader")[
+                    i
+                ].innerHTML = "Click here to MOVE";
+            }
+        }
+    </script>
 </body>
