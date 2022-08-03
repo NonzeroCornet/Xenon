@@ -1,8 +1,11 @@
+<DOCTYPE html>
+    <html>
+        <body>
 <center>
     <script>
         function newElement() {
             document.getElementById("elements").innerHTML +=
-                "<li class='slide' ondblclick='this.remove()'><p>" +
+                "<li class='slide' onclick='if(altIsDown) {this.remove()}'><p>" +
                 document.getElementById("selectElem").value +
                 "</p> <button onclick='addData(this)'>Add Data</button></li>";
         }
@@ -38,14 +41,14 @@
             <option value="Info">Info</option>
         </optgroup>
     </select>
-    <button onclick="newElement()">New Card</button>
+    <button onclick="newElement(); altIsDown = false; for(var i = 0; i < document.getElementsByClassName('slide').length; i++){document.getElementsByClassName('slide')[i].style.backgroundColor = '#2f2f2f';}">New Card</button>
     <button onclick="window.open('/createCard', '', 'width=9999,height=9999');">
         Create Card
     </button>
     <ul class="slides" id="elements">
         <li
             class="slide"
-            ondblclick="this.remove()"
+            onclick="if(altIsDown) {this.remove()}"
             data-extra="username:nousername;password:password;"
         >
             <p>Login</p>
@@ -53,7 +56,7 @@
         </li>
         <li
             class="slide"
-            ondblclick="this.remove()"
+            onclick="if(altIsDown) {this.remove()}"
             data-extra="info:Successfully Logged In;"
         >
             <p>Info</p>
@@ -161,5 +164,27 @@
                 $(".slide-placeholder-animator").remove();
             },
         });
+
+        var altIsDown = false;
+                    window.addEventListener("keydown", (event) => {
+                        if(event.key == "Alt") {
+                            var elements = document.getElementsByClassName("slide");
+                            if(!altIsDown) {
+                            altIsDown = true;
+                                
+	for(var i = 0; i < elements.length; i++){
+		elements[i].style.backgroundColor = "red";
+	}
+                            } else {
+                                altIsDown = false;
+                                for(var i = 0; i < elements.length; i++){
+		elements[i].style.backgroundColor = "#2f2f2f";
+	}
+                            }
+                            
+                        }
+                    });
     </script>
 </center>
+        </body>
+    </html>
