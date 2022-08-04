@@ -1,4 +1,4 @@
-# Thorium-Away
+# Xenon
 
 Away mission software for the Christa McAuliffe Space Center
 
