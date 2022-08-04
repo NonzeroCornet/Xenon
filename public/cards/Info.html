@@ -2,8 +2,6 @@
     <script src="https://xenoncdn.glitch.me/xenoncard.js"></script>
     <script>
         document.write(cardData("info"));
-        setTimeout(function () {
-            nextCard();
-        }, 4000);
+        document.body.setAttribute("onclick", "nextCard()");
     </script>
 </body>

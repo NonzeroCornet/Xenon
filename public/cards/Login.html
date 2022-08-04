@@ -6,8 +6,6 @@
         document.write("<br>");
         document.write(cardData("password"));
 
-        setTimeout(function () {
-            nextCard();
-        }, 2000);
+        document.body.setAttribute("onclick", "nextCard()");
     </script>
 </body>

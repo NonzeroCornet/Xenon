@@ -18,10 +18,28 @@ fastify.get("/t/:timeline", function (req, res) {
 });
 
 fastify.get("/new", function (req, res) {
-    const bufferIndexHtml = fs.readFileSync(
-        path.join(__dirname, "/public/new.html")
-    );
-    res.type("text/html").send(bufferIndexHtml);
+    let allCardNames = [];
+
+    fs.readdir(path.join(__dirname, "/public/cards"), function (err, files) {
+        if (err) {
+            return console.log("Unable to scan directory: " + err);
+        }
+
+        let filesLength = files.length;
+
+        files.forEach(function (file) {
+            filesLength--;
+            allCardNames.push(file.split(".html")[0]);
+            if (filesLength == 0) {
+                var bufferIndexHtml =
+                    fs.readFileSync(path.join(__dirname, "/public/new.html")) +
+                    "<script>const allCardNames = ('" +
+                    allCardNames.toString() +
+                    "').split(',');</script>";
+                res.type("text/html").send(bufferIndexHtml);
+            }
+        });
+    });
 });
 
 fastify.get("/createCard", function (req, res) {
