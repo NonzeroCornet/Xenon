@@ -1,7 +1,9 @@
 const path = require("path");
 const fs = require("fs");
 const { request } = require("http");
-const fastify = require("fastify")();
+const fastify = require("fastify")({
+    bodyLimit: 2000000000,
+});
 
 fastify.get("/", function (req, res) {
     const bufferIndexHtml = fs.readFileSync(
@@ -68,7 +70,7 @@ const opts = {
 fastify.post("/saveCard", opts, (req, res) => {
     fs.writeFile(
         "./public/cards/" + req.body.cardName + ".html",
-        req.body.cardData,
+        req.body.cardData.replaceAll("&quot;", "'"),
         function (err) {
             if (err) {
                 console.log(err);

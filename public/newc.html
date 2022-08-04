@@ -149,13 +149,14 @@
         });
 
         function saveCard() {
+            Array.from(
+                document.getElementsByClassName("draggableheader")
+            ).forEach((elem) => {
+                elem.remove();
+            });
+
             let cardData =
-                document
-                    .getElementById("allthethings")
-                    .innerHTML.replaceAll(
-                        '<div class="draggableheader">Click here to MOVE</div>',
-                        ""
-                    ) +
+                document.getElementById("allthethings").innerHTML +
                 "<style>" +
                 document.getElementById("importantStyles").innerHTML +
                 "</style>";
@@ -219,6 +220,23 @@
                 }
             }
         });
+
+        document.body.onload = setTimeout(function () {
+            setInterval(function () {
+                for (
+                    let i = 0;
+                    i < document.querySelectorAll('[type="text"]').length;
+                    i++
+                ) {
+                    document
+                        .querySelectorAll('[type="text"]')
+                        [i].setAttribute(
+                            "onchange",
+                            'this.setAttribute("value", this.value)'
+                        );
+                }
+            }, 0);
+        }, 1000);
 
         window.addEventListener("keydown", (event) => {
             if (event.key == "Shift") {
