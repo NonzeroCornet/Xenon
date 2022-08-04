@@ -31,19 +31,35 @@ fastify.get("/createCard", function (req, res) {
     res.type("text/html").send(bufferIndexHtml);
 });
 
-fastify.get("/saveCard/:name/:data", (req, res) => {
-    const { name, data } = req.params;
+const opts = {
+    schema: {
+        querystring: {
+            theData: { type: "object" },
+        },
+        response: {
+            200: {
+                type: "object",
+                properties: {
+                    success: { type: "boolean" },
+                },
+            },
+        },
+    },
+};
+
+fastify.post("/saveCard", opts, (req, res) => {
     fs.writeFile(
-        "./public/cards/" + name + ".html",
-        decodeURIComponent(data).replaceAll("%2E", "."),
+        "./public/cards/" + req.body.cardName + ".html",
+        req.body.cardData,
         function (err) {
             if (err) {
+                console.log(err);
                 res.send(err);
                 throw err;
             }
-            res.type("text/html").send("<script>window.close()</script>");
         }
     );
+    res.send({ success: true });
 });
 
 fastify.register(require("@fastify/static"), {

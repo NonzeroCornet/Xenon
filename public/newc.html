@@ -150,6 +150,7 @@
         });
 
         function saveCard() {
+            /*
             window.location.href =
                 "/saveCard/" +
                 document.getElementById("cardName").value.replace(" ", "_") +
@@ -170,6 +171,38 @@
                             .replaceAll("-", "%2D") +
                         "</style>"
                 );
+                */
+
+            let cardData =
+                document
+                    .getElementById("allthethings")
+                    .innerHTML.replaceAll(
+                        '<div class="draggableheader">Click here to MOVE</div>',
+                        ""
+                    ) +
+                "<style>" +
+                document.getElementById("importantStyles").innerHTML +
+                "</style>";
+
+            let cardName = document
+                .getElementById("cardName")
+                .value.replaceAll(" ", "_");
+
+            let formData = new FormData();
+
+            let theData = {
+                cardName: cardName,
+                cardData: cardData,
+            };
+
+            formData.append("theData", theData);
+            fetch("/saveCard", {
+                method: "POST",
+                body: JSON.stringify(theData),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
         }
 
         var altIsDown = false;
