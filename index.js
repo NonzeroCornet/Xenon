@@ -33,10 +33,17 @@ fastify.get("/createCard", function (req, res) {
 
 fastify.get("/saveCard/:name/:data", (req, res) => {
     const { name, data } = req.params;
-    fs.writeFile("./public/cards/"+name+".html", decodeURIComponent(data).replaceAll("%2E", "."), function (err) {
-        if (err) { res.send(err); throw err};
-        res.type("text/html").send('<script>window.close()</script>');
-    });
+    fs.writeFile(
+        "./public/cards/" + name + ".html",
+        decodeURIComponent(data).replaceAll("%2E", "."),
+        function (err) {
+            if (err) {
+                res.send(err);
+                throw err;
+            }
+            res.type("text/html").send("<script>window.close()</script>");
+        }
+    );
 });
 
 fastify.register(require("@fastify/static"), {

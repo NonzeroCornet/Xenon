@@ -1,190 +1,209 @@
 <DOCTYPE html>
     <html>
         <body>
-<center>
-    <script>
-        function newElement() {
-            document.getElementById("elements").innerHTML +=
-                "<li class='slide' onclick='if(altIsDown) {this.remove()}'><p>" +
-                document.getElementById("selectElem").value +
-                "</p> <button onclick='addData(this)'>Add Data</button></li>";
-        }
+            <center>
+                <script>
+                    function newElement() {
+                        document.getElementById("elements").innerHTML +=
+                            "<li class='slide' onclick='if(altIsDown) {this.remove()}'><p>" +
+                            document.getElementById("selectElem").value +
+                            "</p> <button onclick='addData(this)'>Add Data</button></li>";
+                    }
 
-        function addData(element) {
-            var prmpt = prompt("Data:", element.parentElement.dataset.extra);
-            element.parentElement.dataset.extra = prmpt;
-        }
+                    function addData(element) {
+                        var prmpt = prompt(
+                            "Data:",
+                            element.parentElement.dataset.extra
+                        );
+                        element.parentElement.dataset.extra = prmpt;
+                    }
 
-        function parsePreset() {
-            let parsedPreset = "{";
-            let elems = document.getElementById("elements");
-            for (let i = 0; i < elems.children.length; i++) {
-                parsedPreset +=
-                    '"' +
-                    elems.children[i].children[0].innerHTML +
-                    '":"' +
-                    elems.children[i].dataset.extra.replaceAll(";", "%3B") +
-                    '",';
-            }
-            parsedPreset = JSON.parse(parsedPreset.slice(0, -1) + "}");
-            return parsedPreset;
-        }
-    </script>
-    <input id="name" value="Timeline Name" /><button
-        onclick="document.cookie = document.getElementById('name').value.replaceAll(' ', '_') + '='+JSON.stringify(parsePreset())+'; expires=Fri, 31 Dec 9999 23:59:59 GMT;'; window.location.replace('/')"
-    >
-        Save Preset</button
-    ><br />
-    <select id="selectElem">
-        <optgroup>
-            <option value="Login">Login</option>
-            <option value="Info">Info</option>
-        </optgroup>
-    </select>
-    <button onclick="newElement(); altIsDown = false; for(var i = 0; i < document.getElementsByClassName('slide').length; i++){document.getElementsByClassName('slide')[i].style.backgroundColor = '#2f2f2f';}">New Card</button>
-    <button onclick="window.open('/createCard', '', 'width=9999,height=9999');">
-        Create Card
-    </button>
-    <ul class="slides" id="elements">
-        <li
-            class="slide"
-            onclick="if(altIsDown) {this.remove()}"
-            data-extra="username:nousername;password:password;"
-        >
-            <p>Login</p>
-            <button onclick="addData(this)">Add Data</button>
-        </li>
-        <li
-            class="slide"
-            onclick="if(altIsDown) {this.remove()}"
-            data-extra="info:Successfully Logged In;"
-        >
-            <p>Info</p>
-            <button onclick="addData(this)">Add Data</button>
-        </li>
-    </ul>
+                    function parsePreset() {
+                        let parsedPreset = "{";
+                        let elems = document.getElementById("elements");
+                        for (let i = 0; i < elems.children.length; i++) {
+                            parsedPreset +=
+                                '"' +
+                                elems.children[i].children[0].innerHTML +
+                                '":"' +
+                                elems.children[i].dataset.extra.replaceAll(
+                                    ";",
+                                    "%3B"
+                                ) +
+                                '",';
+                        }
+                        parsedPreset = JSON.parse(
+                            parsedPreset.slice(0, -1) + "}"
+                        );
+                        return parsedPreset;
+                    }
+                </script>
+                <input id="name" value="Timeline Name" /><button
+                    onclick="document.cookie = document.getElementById('name').value.replaceAll(' ', '_') + '='+JSON.stringify(parsePreset())+'; expires=Fri, 31 Dec 9999 23:59:59 GMT;'; window.location.replace('/')"
+                >
+                    Save Preset</button
+                ><br />
+                <select id="selectElem">
+                    <optgroup>
+                        <option value="Login">Login</option>
+                        <option value="Info">Info</option>
+                    </optgroup>
+                </select>
+                <button
+                    onclick="newElement(); altIsDown = false; for(var i = 0; i < document.getElementsByClassName('slide').length; i++){document.getElementsByClassName('slide')[i].style.backgroundColor = '#2f2f2f';}"
+                >
+                    New Card
+                </button>
+                <button
+                    onclick="window.open('/createCard', '', 'width=9999,height=9999');"
+                >
+                    Create Card
+                </button>
+                <ul class="slides" id="elements">
+                    <li
+                        class="slide"
+                        onclick="if(altIsDown) {this.remove()}"
+                        data-extra="username:nousername;password:password;"
+                    >
+                        <p>Login</p>
+                        <button onclick="addData(this)">Add Data</button>
+                    </li>
+                    <li
+                        class="slide"
+                        onclick="if(altIsDown) {this.remove()}"
+                        data-extra="info:Successfully Logged In;"
+                    >
+                        <p>Info</p>
+                        <button onclick="addData(this)">Add Data</button>
+                    </li>
+                </ul>
 
-    <style>
-        body {
-            padding: 20px;
-        }
-        .slides {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            width: 300px;
-        }
-        .slide {
-            padding: 15px;
-            background-color: #2f2f2f;
-            margin: 0 0 15px;
-            text-align: center;
-            color: #fff;
-            border: 2px solid #444;
-        }
+                <style>
+                    body {
+                        padding: 20px;
+                    }
+                    .slides {
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                        width: 300px;
+                    }
+                    .slide {
+                        padding: 15px;
+                        background-color: #2f2f2f;
+                        margin: 0 0 15px;
+                        text-align: center;
+                        color: #fff;
+                        border: 2px solid #444;
+                    }
 
-        .slide-placeholder {
-            background: #dadada;
-            position: relative;
-        }
-        .slide-placeholder:after {
-            content: " ";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 15px;
-            background-color: #fff;
-        }
+                    .slide-placeholder {
+                        background: #dadada;
+                        position: relative;
+                    }
+                    .slide-placeholder:after {
+                        content: " ";
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        height: 15px;
+                        background-color: #fff;
+                    }
 
-        .slide2 {
-            height: 30px;
-        }
-        .slide3 {
-            height: 50px;
-        }
-        .slide4 {
-            height: 90px;
-        }
-        .slide5 {
-            height: 35px;
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script>
-        $(".slides").sortable({
-            placeholder: "slide-placeholder",
-            axis: "y",
-            revert: 150,
-            start: function (e, ui) {
-                placeholderHeight = ui.item.outerHeight();
-                ui.placeholder.height(placeholderHeight + 15);
-                $(
-                    '<div class="slide-placeholder-animator" data-height="' +
-                        placeholderHeight +
-                        '"></div>'
-                ).insertAfter(ui.placeholder);
-            },
-            change: function (event, ui) {
-                ui.placeholder
-                    .stop()
-                    .height(0)
-                    .animate(
-                        {
-                            height: ui.item.outerHeight() + 15,
-                        },
-                        300
-                    );
-
-                placeholderAnimatorHeight = parseInt(
-                    $(".slide-placeholder-animator").attr("data-height")
-                );
-
-                $(".slide-placeholder-animator")
-                    .stop()
-                    .height(placeholderAnimatorHeight + 15)
-                    .animate(
-                        {
-                            height: 0,
-                        },
-                        300,
-                        function () {
-                            $(this).remove();
+                    .slide2 {
+                        height: 30px;
+                    }
+                    .slide3 {
+                        height: 50px;
+                    }
+                    .slide4 {
+                        height: 90px;
+                    }
+                    .slide5 {
+                        height: 35px;
+                    }
+                </style>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+                <script>
+                    $(".slides").sortable({
+                        placeholder: "slide-placeholder",
+                        axis: "y",
+                        revert: 150,
+                        start: function (e, ui) {
                             placeholderHeight = ui.item.outerHeight();
+                            ui.placeholder.height(placeholderHeight + 15);
                             $(
                                 '<div class="slide-placeholder-animator" data-height="' +
                                     placeholderHeight +
                                     '"></div>'
                             ).insertAfter(ui.placeholder);
-                        }
-                    );
-            },
-            stop: function (e, ui) {
-                $(".slide-placeholder-animator").remove();
-            },
-        });
+                        },
+                        change: function (event, ui) {
+                            ui.placeholder
+                                .stop()
+                                .height(0)
+                                .animate(
+                                    {
+                                        height: ui.item.outerHeight() + 15,
+                                    },
+                                    300
+                                );
 
-        var altIsDown = false;
+                            placeholderAnimatorHeight = parseInt(
+                                $(".slide-placeholder-animator").attr(
+                                    "data-height"
+                                )
+                            );
+
+                            $(".slide-placeholder-animator")
+                                .stop()
+                                .height(placeholderAnimatorHeight + 15)
+                                .animate(
+                                    {
+                                        height: 0,
+                                    },
+                                    300,
+                                    function () {
+                                        $(this).remove();
+                                        placeholderHeight =
+                                            ui.item.outerHeight();
+                                        $(
+                                            '<div class="slide-placeholder-animator" data-height="' +
+                                                placeholderHeight +
+                                                '"></div>'
+                                        ).insertAfter(ui.placeholder);
+                                    }
+                                );
+                        },
+                        stop: function (e, ui) {
+                            $(".slide-placeholder-animator").remove();
+                        },
+                    });
+
+                    var altIsDown = false;
                     window.addEventListener("keydown", (event) => {
-                        if(event.key == "Alt") {
-                            var elements = document.getElementsByClassName("slide");
-                            if(!altIsDown) {
-                            altIsDown = true;
-                                
-	for(var i = 0; i < elements.length; i++){
-		elements[i].style.backgroundColor = "red";
-	}
+                        if (event.key == "Alt") {
+                            var elements =
+                                document.getElementsByClassName("slide");
+                            if (!altIsDown) {
+                                altIsDown = true;
+
+                                for (var i = 0; i < elements.length; i++) {
+                                    elements[i].style.backgroundColor = "red";
+                                }
                             } else {
                                 altIsDown = false;
-                                for(var i = 0; i < elements.length; i++){
-		elements[i].style.backgroundColor = "#2f2f2f";
-	}
+                                for (var i = 0; i < elements.length; i++) {
+                                    elements[i].style.backgroundColor =
+                                        "#2f2f2f";
+                                }
                             }
-                            
                         }
                     });
-    </script>
-</center>
+                </script>
+            </center>
         </body>
-    </html>
+    </html></DOCTYPE
+>

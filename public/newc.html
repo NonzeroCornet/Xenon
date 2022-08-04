@@ -150,7 +150,26 @@
         });
 
         function saveCard() {
-            window.location.href = "/saveCard/" + document.getElementById("cardName").value.replace(" ", "_")+"/"+encodeURIComponent(document.getElementById("allthethings").innerHTML.replaceAll('<div class="draggableheader">Click here to MOVE</div>',"") +"<style>"+document.getElementById("importantStyles").innerHTML.replaceAll(".", "%2E").replaceAll("<", "%3C").replaceAll(">", "%3E").replaceAll("-", "%2D") +"</style>");
+            window.location.href =
+                "/saveCard/" +
+                document.getElementById("cardName").value.replace(" ", "_") +
+                "/" +
+                encodeURIComponent(
+                    document
+                        .getElementById("allthethings")
+                        .innerHTML.replaceAll(
+                            '<div class="draggableheader">Click here to MOVE</div>',
+                            ""
+                        ) +
+                        "<style>" +
+                        document
+                            .getElementById("importantStyles")
+                            .innerHTML.replaceAll(".", "%2E")
+                            .replaceAll("<", "%3C")
+                            .replaceAll(">", "%3E")
+                            .replaceAll("-", "%2D") +
+                        "</style>"
+                );
         }
 
         var altIsDown = false;
