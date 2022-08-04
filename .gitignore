@@ -107,5 +107,6 @@ dist
 *.replit
 *.nix
 
-# Cards
-.public/cards
+# Cards and test card
+public/cards/**
+public/cards/test.html
