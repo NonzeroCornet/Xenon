@@ -1,5 +1,5 @@
 <head>
-    <link rel="icon" href="/Logo_Small_Transparent.png" />
+    <link rel="icon" href="./Logo_Small_Transparent.png" />
     <title>Xenon</title>
 </head>
 <body>
@@ -28,7 +28,9 @@
         <button onclick="document.getElementById('newImageUpload').click()">
             Add Image
         </button>
-        <button onclick="document.getElementById('scripter').style.display = 'block'">
+        <button
+            onclick="document.getElementById('scripter').style.display = 'block'"
+        >
             Open Scripter
         </button>
         <button onclick="saveCard()">Save Card</button>
@@ -38,9 +40,24 @@
         <div id="statics"></div>
         <div id="dynamics"></div>
     </div>
-    <div id="scripter" style="position: absolute; z-index: 99; display: none; width: calc(100% - 15px); height: calc(100% - 15px); background-color: grey">
+    <div
+        id="scripter"
+        style="
+            position: absolute;
+            z-index: 99;
+            display: none;
+            width: calc(100% - 15px);
+            height: calc(100% - 15px);
+            background-color: grey;
+        "
+    >
         <button style="float: left" onclick="">+</button>
-        <button style="float: right" onclick="document.getElementById('scripter').style.display = 'none'">X</button>
+        <button
+            style="float: right"
+            onclick="document.getElementById('scripter').style.display = 'none'"
+        >
+            X
+        </button>
     </div>
 
     <style id="importantStyles">
@@ -62,9 +79,9 @@
     </style>
     <style>
         #statics {
-            background: #1D1D2A;
+            background: #1d1d2a;
         }
-        
+
         .draggableheader {
             opacity: 0%;
             padding: 10px;

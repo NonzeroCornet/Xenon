@@ -1,12 +1,14 @@
 {
-    "name": "awaymissionsoftware",
+    "name": "xenon",
     "version": "1.0.0",
-    "description": "",
+    "description": "Xenon is software that is being designed for the Christa McAullife Space Center to use in away missions.",
     "main": "index.js",
     "scripts": {
         "startLin": "clear && node index.js",
         "startWin": "cls && node index.js",
-        "start": "electron ."
+        "start": "electron-forge start",
+        "package": "electron-forge package",
+        "make": "electron-forge make"
     },
     "repository": {
         "type": "git",
@@ -20,11 +22,44 @@
     "homepage": "https://github.com/NonzeroCornet/Thorium-Away#readme",
     "dependencies": {
         "@fastify/static": "^6.4.1",
+        "electron-squirrel-startup": "^1.0.0",
         "fastify": "^4.3.0",
         "fs": "^0.0.1-security",
         "path": "^0.12.7"
     },
     "devDependencies": {
+        "@electron-forge/cli": "^6.0.0-beta.65",
+        "@electron-forge/maker-deb": "^6.0.0-beta.65",
+        "@electron-forge/maker-rpm": "^6.0.0-beta.65",
+        "@electron-forge/maker-squirrel": "^6.0.0-beta.65",
+        "@electron-forge/maker-zip": "^6.0.0-beta.65",
         "electron": "^20.0.1"
+    },
+    "config": {
+        "forge": {
+            "packagerConfig": {},
+            "makers": [
+                {
+                    "name": "@electron-forge/maker-squirrel",
+                    "config": {
+                        "name": "awaymissionsoftware"
+                    }
+                },
+                {
+                    "name": "@electron-forge/maker-zip",
+                    "platforms": [
+                        "darwin"
+                    ]
+                },
+                {
+                    "name": "@electron-forge/maker-deb",
+                    "config": {}
+                },
+                {
+                    "name": "@electron-forge/maker-rpm",
+                    "config": {}
+                }
+            ]
+        }
     }
 }

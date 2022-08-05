@@ -36,7 +36,7 @@ fastify.get("/t/:timeline", function (req, res) {
 fastify.get("/new", function (req, res) {
     let allCardNames = [];
 
-    fs.readdir(path.join(__dirname, "/public/cards"), function (err, files) {
+    fs.readdir("./public/cards", function (err, files) {
         if (err) {
             return console.log("Unable to scan directory: " + err);
         }
