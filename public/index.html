@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" href="/Logo_Small_Transparent.png" />
+        <link rel="icon" href="./Logo_Small_Transparent.png" />
         <title>Xenon</title>
         <style>
             @font-face {
@@ -12,7 +12,7 @@
             body {
                 margin-top: 15%;
                 font-family: edge;
-                background: url(/logo.png) no-repeat center center fixed;
+                background: url(./logo.png) no-repeat center center fixed;
                 background-size: cover;
             }
 
@@ -29,20 +29,29 @@
         </style>
     </head>
     <body>
-        <div style="float: left; display: flex; flex-direction: column; align-items: center; justify-content: space-around; margin-left: 5%">
+        <div
+            style="
+                float: left;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                margin-left: 5%;
+            "
+        >
             <p style="font-size: xx-large; letter-spacing: 2px">
-                Please Select Timeline<br>From The Dropdown
+                Please Select Timeline<br />From The Dropdown
             </p>
             <div>
-            <label for="presets">Timeline:</label>
+                <label for="presets">Timeline:</label>
 
-            <select name="presets" id="presets">
-                <optgroup></optgroup>
-            </select>
+                <select name="presets" id="presets">
+                    <optgroup></optgroup>
+                </select>
             </div>
             <br /><br />
             <button
-                onclick="window.location.href += 't/'+document.getElementById('presets').value.replace(/\s/g, '_')"
+                onclick="window.location.href = 'http://localhost/t/'+document.getElementById('presets').value.replace(/\s/g, '_')"
             >
                 Start</button
             ><button
@@ -50,7 +59,7 @@
             >
                 Delete Timeline</button
             ><br />
-            <button onclick="window.location.href += 'new'">
+            <button onclick="window.location.href = 'http://localhost/new'">
                 New Timeline
             </button>
 
@@ -76,13 +85,40 @@
                 });
             </script>
         </div>
-        <div style="float: right; display: flex; flex-direction: column; align-items: right; justify-content: space-around; margin-right: 5%; text-align: right; margin-top: -10vh">
-            <p style="font-size: 28px; letter-spacing: 2px; color: magenta">Brian Dean Ullery</p>
-            <p style="font-size: 24px; letter-spacing: 2px; margin-top: -15px">Project Head<br>Senior Full Stack Developer<br>Senior Designer</p><br><br>
-            <p style="font-size: 28px; letter-spacing: 2px; color: magenta">Nathan Galley/Isaac Baird</p>
-            <p style="font-size: 24px; letter-spacing: 2px; margin-top: -15px">Junior Frontend Developer<br>Junior Designer</p><br><br>
-            <p style="font-size: 28px; letter-spacing: 2px; color: magenta">Michael Wiltbank</p>
-            <p style="font-size: 24px; letter-spacing: 2px; margin-top: -15px">Asset Manager<br>Asset Designer</p><br><br>
+        <div
+            style="
+                float: right;
+                display: flex;
+                flex-direction: column;
+                align-items: right;
+                justify-content: space-around;
+                margin-right: 5%;
+                text-align: right;
+                margin-top: -10vh;
+            "
+        >
+            <p style="font-size: 28px; letter-spacing: 2px; color: magenta">
+                Brian Dean Ullery
+            </p>
+            <p style="font-size: 24px; letter-spacing: 2px; margin-top: -15px">
+                Project Head<br />Senior Full Stack Developer<br />Senior
+                Designer
+            </p>
+            <br /><br />
+            <p style="font-size: 28px; letter-spacing: 2px; color: magenta">
+                Nathan Galley/Isaac Baird
+            </p>
+            <p style="font-size: 24px; letter-spacing: 2px; margin-top: -15px">
+                Junior Frontend Developer<br />Junior Designer
+            </p>
+            <br /><br />
+            <p style="font-size: 28px; letter-spacing: 2px; color: magenta">
+                Michael Wiltbank
+            </p>
+            <p style="font-size: 24px; letter-spacing: 2px; margin-top: -15px">
+                Asset Manager<br />Asset Designer
+            </p>
+            <br /><br />
         </div>
     </body>
 </html>

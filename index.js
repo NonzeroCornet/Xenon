@@ -5,6 +5,20 @@ const fastify = require("fastify")({
     bodyLimit: 2000000000,
 });
 
+const { app, BrowserWindow } = require("electron");
+const createWindow = () => {
+    const win = new BrowserWindow({
+        width: 800,
+        height: 600,
+        fullscreen: true,
+    });
+    win.setMenuBarVisibility(false);
+    win.loadFile("public/index.html");
+};
+app.whenReady().then(() => {
+    createWindow();
+});
+
 fastify.get("/", function (req, res) {
     const bufferIndexHtml = fs.readFileSync(
         path.join(__dirname, "/public/index.html")
