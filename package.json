@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "cls && node index.js"
+        "startLin": "clear && node index.js",
+        "startWin": "cls && node index.js"
     },
     "repository": {
         "type": "git",

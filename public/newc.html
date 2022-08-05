@@ -1,3 +1,7 @@
+<head>
+    <link rel="icon" href="/Logo_Small_Transparent.png" />
+    <title>Xenon</title>
+</head>
 <body>
     <div style="position: absolute; z-index: 20; bottom: 10px; left: 10px">
         <button
@@ -29,12 +33,7 @@
     </div>
     <div id="allthethings">
         <div id="statics"></div>
-        <div id="dynamics">
-            <div class="draggable">
-                <input type="text" value="Test" /><br />
-                <div class="draggableheader">Click here to MOVE</div>
-            </div>
-        </div>
+        <div id="dynamics"></div>
     </div>
 
     <style id="importantStyles">
@@ -55,6 +54,10 @@
         }
     </style>
     <style>
+        #statics {
+            background: #1D1D2A;
+        }
+        
         .draggableheader {
             opacity: 0%;
             padding: 10px;
