@@ -73,7 +73,7 @@
                 New Card
             </button>
             <button
-                onclick="window.open('/createCard', '', 'width=9999,height=9999');"
+                onclick="let ncn = prompt('Card Name'); document.getElementById('selectElem' ).firstElementChild.innerHTML += '<option value=\''+ ncn + '\'>' + ncn + '</option>';window.open('/createCard?'+ncn, '', 'width=9999,height=9999');"
             >
                 Create Card
             </button>

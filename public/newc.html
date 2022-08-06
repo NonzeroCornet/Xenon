@@ -58,6 +58,7 @@
         </button>
         <button onclick="saveCard()">Save Card</button>
         <input type="text" id="cardName" value="Card Name" />
+        <script>document.getElementById("cardName").value = window.location.href.split("?")[1];</script>
     </div>
     <div id="allthethings">
         <div id="statics"></div>
