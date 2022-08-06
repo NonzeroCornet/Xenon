@@ -3,30 +3,55 @@
     <title>Xenon</title>
 </head>
 <body>
-    <div style="position: absolute; z-index: 20; bottom: 10px; left: 10px">
+    <div style="position: fixed; z-index: 20; bottom: 10px; left: 10px">
         <button
             onclick="resetMovers(); document.getElementById('dynamics').innerHTML += '<div class=\'draggable\'><input id=\''+Math.floor(Math.random()*9999999999)+'\' type=\'text\' value=\'Enter some placeholder text here\' /><div class=\'draggableheader\'>Click here to MOVE</div></div>'; for(i in document.getElementsByClassName('draggable')) {dragElement(document.getElementsByClassName('draggable')[i]);}"
         >
             New InputBox
         </button>
+        <button
+            onclick="resetMovers(); document.getElementById('dynamics').innerHTML += '<div class=\'draggable\'><button id=\''+Math.floor(Math.random()*9999999999)+'\'>'+prompt('Enter button text here')+'</button><div class=\'draggableheader\'>Click here to MOVE</div></div>'; for(i in document.getElementsByClassName('draggable')) {dragElement(document.getElementsByClassName('draggable')[i]);}"
+        >
+            New Button
+        </button>
         <input
             type="file"
             id="backgroundUpload"
             style="display: none"
-            multiple
+            accept=".png,.jpg,.gif"
         />
         <input
             type="file"
             id="newImageUpload"
             style="display: none"
             onclick="resetMovers();"
-            multiple
+            accept=".png,.jpg,.gif"
+        />
+        <input
+            type="file"
+            id="newAudioUpload"
+            style="display: none"
+            onclick="resetMovers();"
+            accept=".mp3"
+        />
+        <input
+            type="file"
+            id="newVideoUpload"
+            style="display: none"
+            onclick="resetMovers();"
+            accept=".mp4"
         />
         <button onclick="document.getElementById('backgroundUpload').click()">
             Change Background
         </button>
         <button onclick="document.getElementById('newImageUpload').click()">
             Add Image
+        </button>
+        <button onclick="document.getElementById('newAudioUpload').click()">
+            Add Audio
+        </button>
+        <button onclick="document.getElementById('newVideoUpload').click()">
+            Add Video
         </button>
         <button onclick="document.getElementById('scripter').style.display = 'block'">
             Open Scripter
@@ -39,9 +64,19 @@
         <div id="dynamics"></div>
     </div>
     <div id="scripter" style="position: absolute; z-index: 99; display: none; width: calc(100% - 15px); height: calc(100% - 15px); background-color: grey">
-        <button style="float: left" onclick="">+</button>
         <button style="float: right" onclick="document.getElementById('scripter').style.display = 'none'">X</button>
     </div>
+
+    <script>
+        function addNodeBox(elem) {
+            document.getElementById("scripter").innerHTML += "<div class='draggable'><div style='width:160px;height:160px; background-color: darkgrey; padding: 10px'>The element just clicked</div><div class='draggableheader'>Click here to MOVE</div></div>";
+            for (i in document.getElementsByClassName("draggable")) {
+                    dragElement(
+                        document.getElementsByClassName("draggable")[i]
+                    );
+                }
+        }
+    </script>
 
     <style id="importantStyles">
         #statics {
@@ -129,8 +164,10 @@
     <script>
         let fileInput = document.getElementById("backgroundUpload");
         let fileInput2 = document.getElementById("newImageUpload");
+        let fileInput3 = document.getElementById("newAudioUpload");
+        let fileInput4 = document.getElementById("newVideoUpload");
         fileInput.addEventListener("change", (e) => {
-            const file = e.target.files[0];
+            let file = e.target.files[0];
 
             let reader = new FileReader();
             reader.onloadend = () => {
@@ -141,7 +178,7 @@
         });
 
         fileInput2.addEventListener("change", (e) => {
-            const file = e.target.files[0];
+            let file = e.target.files[0];
 
             let reader2 = new FileReader();
             reader2.onloadend = () => {
@@ -156,6 +193,41 @@
                 }
             };
             reader2.readAsDataURL(file);
+        });
+
+        fileInput3.addEventListener("change", (e) => {
+            let file = e.target.files[0];
+
+            let reader3 = new FileReader();
+            reader3.onloadend = () => {
+                document.getElementById("dynamics").innerHTML += "<div class='draggable'><audio controls><source src='"+reader3.result+"' type='audio/mpeg'></audio><div class='draggableheader'>Click here to MOVE</div></div>";
+                for (i in document.getElementsByClassName("draggable")) {
+                    dragElement(
+                        document.getElementsByClassName("draggable")[i]
+                    );
+                }
+            };
+            reader3.readAsDataURL(file);
+        });
+
+        fileInput4.addEventListener("change", (e) => {
+            let file = e.target.files[0];
+
+            let reader4 = new FileReader();
+            reader4.onloadend = () => {
+                document.getElementById("dynamics").innerHTML += "<div class='draggable'><video onclick='this.play()'><source src='"+reader4.result+"' type='video/mp4'></video><div class='draggableheader'>Click here to MOVE</div></div>";
+                for (i in document.getElementsByClassName("draggable")) {
+                    dragElement(
+                        document.getElementsByClassName("draggable")[i]
+                    );
+                }
+                for (i in document.getElementsByClassName("draggable")) {
+                    dragElement(
+                        document.getElementsByClassName("draggable")[i]
+                    );
+                }
+            };
+            reader4.readAsDataURL(file);
         });
 
         function saveCard() {
@@ -259,7 +331,7 @@
                     for (var i = 0; i < elements.length; i++) {
                         elements[i].style.backgroundColor = "lime";
                         elements[i].innerHTML = "Click here to EDIT";
-                        elements[i].setAttribute("onclick", "alert('edit')");
+                        elements[i].setAttribute("onclick", "addNodeBox(this); document.getElementById('scripter').style.display = 'block'");
                     }
                 } else {
                     shiftIsDown = false;
