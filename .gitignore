@@ -110,6 +110,3 @@ dist
 # Cards and test card
 public/cards/**
 public/cards/test.html
-
-# electron
-out/**
