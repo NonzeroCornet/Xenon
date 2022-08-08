@@ -5,6 +5,16 @@
 <body>
     <div style="position: fixed; z-index: 20; bottom: 10px; left: 10px">
         <button
+            onclick="resetMovers(); document.getElementById('dynamics').innerHTML += '<div class=\'draggable\'><p id=\''+Math.floor(Math.random()*9999999999)+'\' contentEditable>Enter some text here</p><div class=\'draggableheader\'>Click here to MOVE</div></div>'; for(i in document.getElementsByClassName('draggable')) {dragElement(document.getElementsByClassName('draggable')[i]);}"
+        >
+            New Paragraph
+        </button>
+        <button
+            onclick="resetMovers(); document.getElementById('dynamics').innerHTML += '<div class=\'draggable\'><h1 id=\''+Math.floor(Math.random()*9999999999)+'\' contentEditable>Enter some text here</h1><div class=\'draggableheader\'>Click here to MOVE</div></div>'; for(i in document.getElementsByClassName('draggable')) {dragElement(document.getElementsByClassName('draggable')[i]);}"
+        >
+            New Heading
+        </button>
+        <button
             onclick="resetMovers(); document.getElementById('dynamics').innerHTML += '<div class=\'draggable\'><input id=\''+Math.floor(Math.random()*9999999999)+'\' type=\'text\' value=\'Enter some placeholder text here\' /><div class=\'draggableheader\'>Click here to MOVE</div></div>'; for(i in document.getElementsByClassName('draggable')) {dragElement(document.getElementsByClassName('draggable')[i]);}"
         >
             New InputBox
@@ -53,16 +63,20 @@
         <button onclick="document.getElementById('newVideoUpload').click()">
             Add Video
         </button>
-        <button onclick="document.getElementById('scripter').style.display = 'block'">
+        <button
+            onclick="document.getElementById('scripter').style.display = 'block'"
+        >
             Open Scripter
         </button>
         <button onclick="saveCard()">Save Card</button>
         <input type="text" id="cardName" value="Card Name" />
-        <script>document.getElementById("cardName").value = window.location.href.split("?")[1];</script>
+        <script>
+            document.getElementById("cardName").value = window.location.href.split("?")[1];
+        </script>
     </div>
     <script>
-        var scriptToPut = "\<"+"script>";
-        
+        var scriptToPut = "";
+
         function addNodeBox(elem) {
             scriptToPut += "var elem"+elem.parentElement.firstElementChild.id+" = document.getElementById('"+elem.parentElement.firstElementChild.id+"');";
 
@@ -71,15 +85,15 @@
             if(elem.parentElement.firstElementChild.tagName == "INPUT") {
                 selectE = "<p>IF &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VALUE<br>IS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' style='width: 50%'/><br>THEN <input type='text' style='width: 50%' value='ElementID.Attribute'/><br>IS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' style='width: 50%' value='NEW VALUE'/><p>";
             } else if(elem.parentElement.firstElementChild.tagName == "BUTTON") {
-                selectE = "<p>DISABLED <input type='checkbox'/><br>IF ONCLICK <br>THEN <input type='text' style='width: 50%' value='ElementID.Attribute'/><br>IS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' style='width: 50%' value='NEW VALUE'/><br>OR NEXTCARD <input type='checkbox'/><p>";
-            } else if(elem.parentElement.firstElementChild.tagName == "IMG") {
-                selectE = "<p>HIDDEN <input type='checkbox'/><p>";
+                selectE = "<p>DISABLED <input type='checkbox' onclick='toggleDisabled("+elem.parentElement.firstElementChild.id.toString()+")'/><br>IF ONCLICK <br>THEN <input type='text' style='width: 50%' value='ElementID.Attribute'/><br>IS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' style='width: 50%' value='NEW VALUE'/><br>OR NEXTCARD <input type='checkbox' onclick='toggleNextCardBtn("+elem.parentElement.firstElementChild.id.toString()+")'/><p>";
+            } else if(elem.parentElement.firstElementChild.tagName == "IMG" || elem.parentElement.firstElementChild.tagName == "P" || elem.parentElement.firstElementChild.tagName == "H1") {
+                selectE = "<p>HIDDEN <input type='checkbox' onclick='toggleHide("+elem.parentElement.firstElementChild.id.toString()+")'/><p>";
             } else if(elem.parentElement.firstElementChild.tagName == "VIDEO" || elem.parentElement.firstElementChild.tagName == "AUDIO") {
                 selectE = "<p>LOOP <input type='checkbox' onclick='toggleVidLoop("+elem.parentElement.firstElementChild.id+")' /><p>";
             }
-            
+
             document.getElementById("scripter").innerHTML += "<div class='draggable' data-elemid='"+elem.parentElement.firstElementChild.id.toString()+"' data-boxtype='"+elem.parentElement.firstElementChild.tagName+"'><div style='width:160px;height:200px; background-color: darkgrey; padding: 10px'>Type: "+elem.parentElement.firstElementChild.tagName+"<br>ID: "+elem.parentElement.firstElementChild.id+"<br><br>"+selectE+"</div><div class='draggableheader2'>Click here to MOVE</div></div>";
-            
+
             for (i in document.getElementsByClassName("draggable")) {
                 dragElement(
                     document.getElementsByClassName("draggable")[i]
@@ -88,23 +102,55 @@
             resetMovers();
         }
 
-                    function toggleVidLoop(vid) {
-                        if(document.getElementById(vid.toString()).loop){
-                            document.getElementById(vid.toString()).loop = false;
-                            document.getElementById(vid.toString()).autoplay = false;
-                        } else {
-                            document.getElementById(vid.toString()).loop = true;
-                            document.getElementById(vid.toString()).autoplay = true;
-                            document.getElementById(vid.toString()).play();
-                        }
-                    }
+        function toggleNextCardBtn(elem) {
+            if(document.getElementById(elem.toString()).class == "gotonextbtnonclick") {
+                document.getElementById(elem.toString()).setAttribute('class',"");
+            } else {
+                document.getElementById(elem.toString()).setAttribute('class',"gotonextbtnonclick");
+            }
+        }
+
+        function toggleDisabled(elem) {
+            if(document.getElementById(elem).disabled) {
+                document.getElementById(elem).disabled = false;
+            } else {
+                document.getElementById(elem).disabled = true;
+            }
+        }
+
+        function toggleHide(elem) {
+            if(document.getElementById(elem).style.visibility == "hidden") {
+                document.getElementById(elem).style.visibility = "visible";
+            } else {
+                document.getElementById(elem).style.visibility = "hidden";
+            }
+        }
+
+        function toggleVidLoop(vid) {
+            if(document.getElementById(vid.toString()).loop) {
+                document.getElementById(vid.toString()).loop = false;
+                document.getElementById(vid.toString()).autoplay = false;
+            } else {
+                document.getElementById(vid.toString()).loop = true;
+                document.getElementById(vid.toString()).autoplay = true;
+                document.getElementById(vid.toString()).play();
+            }
+        }
     </script>
     <div id="allthethings">
         <div id="statics"></div>
         <div id="dynamics"></div>
     </div>
-    <div id="scripter" style="position: absolute; z-index: 99; display: none; width: calc(100% - 15px); height: calc(100% - 15px); background-color: grey">
-        <button style="float: right" onclick="document.getElementById('scripter').style.display = 'none'">X</button>
+    <div
+        id="scripter"
+        style="position: absolute; z-index: 99; display: none; width: calc(100% - 15px); height: calc(100% - 15px); background-color: grey"
+    >
+        <button
+            style="float: right"
+            onclick="document.getElementById('scripter').style.display = 'none'"
+        >
+            X
+        </button>
     </div>
 
     <style id="importantStyles">
@@ -123,12 +169,20 @@
             z-index: 9;
             text-align: center;
         }
+
+        p, h1 {
+            color: white;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
     </style>
     <style>
         #statics {
             background: #1D1D2A;
         }
-        
+
         .draggableheader {
             opacity: 0%;
             padding: 10px;
@@ -279,11 +333,17 @@
                 elem.remove();
             });
 
-            let cardData =
-                document.getElementById("allthethings").innerHTML +
-                "<style>" +
-                document.getElementById("importantStyles").innerHTML +
-                "</style>";
+            Array.from(
+                document.getElementsByTagName("p")
+            ).forEach((elem) => {
+                elem.contentEditable = false;
+            });
+
+            Array.from(
+                document.getElementsByTagName("h1")
+            ).forEach((elem) => {
+                elem.contentEditable = false;
+            });
 
             let scriptCards = document.getElementById("scripter").querySelectorAll('.draggable');
 
@@ -291,9 +351,17 @@
                 if(scriptCards[i].dataset.boxtype == "INPUT") {
                     scriptToPut += "elem"+scriptCards[i].dataset.elemid+".onchange = function() { if(elem"+scriptCards[i].dataset.elemid+".value == '"+scriptCards[i].firstElementChild.children[3].children[1].value+"') { elem"+scriptCards[i].firstElementChild.children[3].children[3].value+" = '"+scriptCards[i].firstElementChild.children[3].children[5].value+"'; } };";
                 } else if(scriptCards[i].dataset.boxtype == "BUTTON") {
-                    scriptToPut += "elem"+scriptCards[i].dataset.elemid+".onclick = function() { elem"+scriptCards[i].firstElementChild.children[3].children[3].value+" = '"+scriptCards[i].firstElementChild.children[3].children[5].value+"'; };";
+                    if(!scriptCards[i].firstElementChild.children[3].children[7].checked) {
+                        scriptToPut += "elem"+scriptCards[i].dataset.elemid+".onclick = function() { elem"+scriptCards[i].firstElementChild.children[3].children[3].value+" = '"+scriptCards[i].firstElementChild.children[3].children[5].value+"'; };";
+                    }
                 }
             }
+
+            let cardData =
+                document.getElementById("allthethings").innerHTML +
+                "<style>" +
+                document.getElementById("importantStyles").innerHTML +
+                "</style><script>"+scriptToPut+"</"+"script>" + "<script src='https://xenoncdn.glitch.me/xenoncard.js'></" + "script>";
 
             let cardName = document
                 .getElementById("cardName")

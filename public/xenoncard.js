@@ -7,6 +7,14 @@ function cardData(data) {
     );
 }
 
+for (let i = 0; i < document.getElementsByClassName("gotonextbtnonclick").length; i++) {
+    document.getElementsByClassName("gotonextbtnonclick")[i].addEventListener("click", (elem) => {
+        if(!document.getElementsByClassName("gotonextbtnonclick")[i].disabled) {
+            nextCard();
+        }
+    });
+}
+
 function nextCard() {
     window.parent.postMessage("nextCard", "*");
 }
