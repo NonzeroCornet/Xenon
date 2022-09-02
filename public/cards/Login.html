@@ -1,11 +1,28 @@
-<body style="background-color: white">
-    Login and stuff
+<body style="background-color: black">
     <script src="https://xenoncdn.glitch.me/xenoncard.js"></script>
+    <style>
+        .login {
+            color: white;
+            text-align: center;
+            font-family: Helvetica;
+            height: auto;
+            margin-top: 40vh;
+        }
+        .large-grid {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 50;
+        }
+    </style>
     <script>
-        document.write(cardData("username"));
-        document.write("<br>");
-        document.write(cardData("password"));
-
+        //document.write(cardData("username"));
+        //document.write("<br>");
+        //document.write(cardData("password"));
+        //document.getelementbyid("[id].src = getcardData")
         document.body.setAttribute("onclick", "nextCard()");
     </script>
+    <div class="large-grid">
+        <div></div>
+        <h1 class="login">Terminal Login</h1>
+    </div>
 </body>
