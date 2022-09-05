@@ -1,12 +1,19 @@
-<body style="background-color: black">
+<body style="background-image: url('https://cdn.discordapp.com/attachments/1002778010736414812/1015077118478135416/login-background.jpg');"">
     <script src="https://xenoncdn.glitch.me/xenoncard.js"></script>
     <style>
+        .username-box{
+            color: gray;
+            text-align: center;
+            font-family: Helvetica;
+            height: auto;
+            margin-top: 3vh;
+        }
         .login {
             color: white;
             text-align: center;
             font-family: Helvetica;
             height: auto;
-            margin-top: 40vh;
+            margin-top: 39vh;
         }
         .large-grid {
             display: grid;
@@ -19,10 +26,13 @@
         //document.write("<br>");
         //document.write(cardData("password"));
         //document.getelementbyid("[id].src = getcardData")
-        document.body.setAttribute("onclick", "nextCard()");
+        //document.body.setAttribute("onclick", "nextCard()");
     </script>
     <div class="large-grid">
         <div></div>
-        <h1 class="login">Terminal Login</h1>
+        <div>
+            <h1 class="login">Terminal Login</h1>
+            <p contentEditable="true" class="username-box">Username</p>
+        </div>
     </div>
 </body>
