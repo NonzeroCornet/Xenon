@@ -1,12 +1,42 @@
 <body style="background-image: url('https://cdn.discordapp.com/attachments/1002778010736414812/1015077118478135416/login-background.jpg');"">
     <script src="https://xenoncdn.glitch.me/xenoncard.js"></script>
     <style>
-        .username-box{
-            color: gray;
+        .glow:focus{
+            outline: none;
+            border: none !important;
+            border: 1px solid #008296 !important; 
+            box-shadow: 0 0 10px 2px #03dbfc;
+        }
+        #username-box{
+            color: rgb(194, 194, 194);
+            padding: 10;
+            text-align: center;
+            font-family: Helvetica;
+
+            height: auto;
+            margin-top: 3vh;
+            margin-left: 300px;
+            margin-right: 300px;
+
+            border: 1px solid rgb(194, 194, 194);
+            border-radius: 10px;
+
+            transition: all 0.2s ease-out;
+        }
+        #password-box{
+            color: rgb(194, 194, 194);
+            padding: 10;
             text-align: center;
             font-family: Helvetica;
             height: auto;
-            margin-top: 3vh;
+            margin-top: 1vh;
+            margin-left: 300px;
+            margin-right: 300px;    
+
+            border:1px solid rgb(194, 194, 194);
+            border-radius: 10px;
+
+            transition: all 0.2s ease-out;
         }
         .login {
             color: white;
@@ -15,24 +45,34 @@
             height: auto;
             margin-top: 39vh;
         }
-        .large-grid {
+        .screen {
             display: grid;
             grid-template-columns: auto auto;
             gap: 50;
         }
+        .login-area {
+            padding-left: 100px;
+        }
     </style>
     <script>
+        let usernameIn = document.getElementById("username-text");
+        var username = cardData("username");
+        var password = cardData("password");
+        if(username == usernameIn.innerHTML){
+            
+        }
         //document.write(cardData("username"));
         //document.write("<br>");
         //document.write(cardData("password"));
         //document.getelementbyid("[id].src = getcardData")
         //document.body.setAttribute("onclick", "nextCard()");
     </script>
-    <div class="large-grid">
+    <div class="screen">
         <div></div>
-        <div>
+        <div class = "login-area">
             <h1 class="login">Terminal Login</h1>
-            <p contentEditable="true" class="username-box">Username</p>
+            <p contentEditable="true" id="username-box" class = "glow">Username</p>
+            <p contentEditable="true" id="password-box" class = "glow">Password</p>
         </div>
     </div>
 </body>
