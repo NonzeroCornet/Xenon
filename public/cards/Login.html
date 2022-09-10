@@ -5,35 +5,35 @@
             outline: none;
             border: none !important;
             border: 1px solid #008296 !important; 
+            color: rgb(194, 194, 194) !important;
             box-shadow: 0 0 10px 2px #03dbfc;
         }
         #username-box{
-            color: rgb(194, 194, 194);
-            padding: 10;
+            color: rgb(163, 163, 163);
             text-align: center;
             font-family: Helvetica;
 
             height: auto;
             margin-top: 3vh;
-            margin-left: 300px;
-            margin-right: 300px;
+            padding: 10;
+            width: 400;
 
-            border: 1px solid rgb(194, 194, 194);
+            border: 1px solid rgb(163, 163, 163);
             border-radius: 10px;
 
             transition: all 0.2s ease-out;
         }
         #password-box{
-            color: rgb(194, 194, 194);
-            padding: 10;
+            color: rgb(163, 163, 163);
             text-align: center;
             font-family: Helvetica;
+            
+            width: 400;
+            padding: 10;
             height: auto;
             margin-top: 1vh;
-            margin-left: 300px;
-            margin-right: 300px;    
 
-            border:1px solid rgb(194, 194, 194);
+            border:1px solid rgb(163, 163, 163);
             border-radius: 10px;
 
             transition: all 0.2s ease-out;
@@ -49,9 +49,6 @@
             display: grid;
             grid-template-columns: auto auto;
             gap: 50;
-        }
-        .login-area {
-            padding-left: 100px;
         }
     </style>
     <script>
@@ -69,7 +66,7 @@
     </script>
     <div class="screen">
         <div></div>
-        <div class = "login-area">
+        <div>
             <h1 class="login">Terminal Login</h1>
             <p contentEditable="true" id="username-box" class = "glow">Username</p>
             <p contentEditable="true" id="password-box" class = "glow">Password</p>
