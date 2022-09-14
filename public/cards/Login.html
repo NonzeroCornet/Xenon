@@ -1,4 +1,5 @@
-<body style="background-image: url('https://cdn.discordapp.com/attachments/1002778010736414812/1015077118478135416/login-background.jpg');"">
+<head></head>
+<body style="background-image: url('https://cdn.discordapp.com/attachments/1002778010736414812/1015077118478135416/login-background.jpg'); background-size: cover; background-repeat: no-repeat;">
     <script src="https://xenoncdn.glitch.me/xenoncard.js"></script>
     <style>
         .glow:focus{
@@ -32,6 +33,7 @@
             padding: 10;
             height: auto;
             margin-top: 1vh;
+            margin-right: 24vh;
 
             border:1px solid rgb(163, 163, 163);
             border-radius: 10px;
@@ -40,36 +42,68 @@
         }
         .login {
             color: white;
-            text-align: center;
             font-family: Helvetica;
             height: auto;
             margin-top: 39vh;
+            margin-left: 96px;
+        }
+        .login-area {
+            position: absolute;
+            right: 20px;
         }
         .screen {
             display: grid;
             grid-template-columns: auto auto;
-            gap: 50;
+        }
+        #ship-pic {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20%;
+            height: 50vh;
+        }
+        #login-button {
+            background-color: transparent;
+            color: rgb(163, 163, 163);
+            text-align: center;
+            font-family: Helvetica;
+            
+            width: 150px;
+            padding: 7.5px;
+            height: auto;
+            margin-top: 1.5vh;
+            margin-left: 10em;
+
+            border:1px solid rgb(163, 163, 163);
+            border-radius: 10px;
+
+            transition: all 0.2s ease-out;
         }
     </style>
     <script>
-        let usernameIn = document.getElementById("username-text");
+        document.getElementById("ship-pic").src = cardData("image");
+        let usernameIn = document.getElementById("username-box");
+        let passwordIn = document.getElementById("password-box");
         var username = cardData("username");
         var password = cardData("password");
-        if(username == usernameIn.innerHTML){
-            
+        if(getElementById("login-button").clicked == true){
+            if(usernameIn.innerHTML == username && passwordIn.innerHTML == password){
+                nextCard();
+            }
         }
-        //document.write(cardData("username"));
+        document.write(cardData("username"));
         //document.write("<br>");
-        //document.write(cardData("password"));
+        document.write(cardData("password"));
         //document.getelementbyid("[id].src = getcardData")
         //document.body.setAttribute("onclick", "nextCard()");
     </script>
     <div class="screen">
-        <div></div>
-        <div>
+        <img id="ship-pic">
+        <div class="login-area">
             <h1 class="login">Terminal Login</h1>
-            <p contentEditable="true" id="username-box" class = "glow">Username</p>
-            <p contentEditable="true" id="password-box" class = "glow">Password</p>
+            <p contenteditable="true" id="username-box" class="glow">Username</p>
+            <p contenteditable="true" id="password-box" class="glow">Password</p>
+            <button id = "login-button" type="button">Login</button>
         </div>
     </div>
 </body>
