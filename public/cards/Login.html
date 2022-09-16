@@ -64,6 +64,8 @@
         }
         #login-button {
             background-color: transparent;
+            cursor: pointer;
+
             color: rgb(163, 163, 163);
             text-align: center;
             font-family: Helvetica;
@@ -82,18 +84,21 @@
     </style>
     <script>
         document.getElementById("ship-pic").src = cardData("image");
-        let usernameIn = document.getElementById("username-box");
-        let passwordIn = document.getElementById("password-box");
         var username = cardData("username");
         var password = cardData("password");
-        if(getElementById("login-button").clicked == true){
+        function check(){
+            let usernameIn = document.getElementById("username-box");
+            let passwordIn = document.getElementById("password-box");
             if(usernameIn.innerHTML == username && passwordIn.innerHTML == password){
-                nextCard();
+                alert("correct");
+                nextCard();            
+            }else{
+                alert("incorrect");
             }
         }
-        document.write(cardData("username"));
+        //document.write(cardData("username"));
         //document.write("<br>");
-        document.write(cardData("password"));
+        //document.write(cardData("password"));
         //document.getelementbyid("[id].src = getcardData")
         //document.body.setAttribute("onclick", "nextCard()");
     </script>
@@ -103,7 +108,7 @@
             <h1 class="login">Terminal Login</h1>
             <p contenteditable="true" id="username-box" class="glow">Username</p>
             <p contenteditable="true" id="password-box" class="glow">Password</p>
-            <button id = "login-button" type="button">Login</button>
+            <button id = "login-button" type="button" onclick="check()" class = "glow">Login</button>
         </div>
     </div>
 </body>
